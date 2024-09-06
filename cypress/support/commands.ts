@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    getToken(): Chainable<string>;
+  }
+}
+
+Cypress.Commands.add('getToken', () => {
+    return cy.request({
+        method: "POST",
+        url: "/users/login",
+        body: {
+            email: "mynana1057@fak.com",
+            password: "mynana1057@fak.com"
+        }
+    }).then((response) => {
+        return response.body.token;
+    });
+});
