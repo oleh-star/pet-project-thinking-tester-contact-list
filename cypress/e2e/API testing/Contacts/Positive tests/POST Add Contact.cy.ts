@@ -35,18 +35,18 @@ describe('Add new contact', () => {
     }).then((response) => {
       contactId = response.body._id
       expect(response.status).to.eq(201);
-      expect(response.body.firstName).is.not.empty;
-      expect(response.body.lastName).is.not.empty;
-      expect(response.body.birthdate).is.not.empty;
-      expect(response.body.email).is.not.empty;
-      expect(response.body.phone).to.have.length(10);
-      expect(response.body.street1).is.not.empty;
-      expect(response.body.street2).is.not.empty;
-      expect(response.body.city).is.not.empty;
-      expect(response.body.stateProvince).is.not.empty;
-      expect(response.body.postalCode).is.not.empty;
-      expect(response.body.country).is.not.empty;
-      expect(response.body.owner).is.not.empty;
+      expect(response.body.firstName).not.empty;
+      expect(response.body.lastName).not.empty;
+      expect(response.body.birthdate).not.empty;
+      expect(response.body.email).not.empty;
+      expect(response.body.phone).have.length(10);
+      expect(response.body.street1).not.empty;
+      expect(response.body.street2).not.empty;
+      expect(response.body.city).not.empty;
+      expect(response.body.stateProvince).not.empty;
+      expect(response.body.postalCode).not.empty;
+      expect(response.body.country).not.empty;
+      expect(response.body.owner).not.empty;
       expect(response.body.__v).eq(0);
     })
   });
