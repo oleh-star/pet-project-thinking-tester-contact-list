@@ -1,15 +1,14 @@
-
-describe('My tests', () => {
+describe('Get all contacts list', () => {
   let token: string;
 
   before(() => {
     cy.getToken().then((t: string) => {
       token = t;
-      cy.log("token = ", token);
+      cy.log(`token: ${token}`);
     });
   });
 
-  it('should make a request with the token', () => {
+  it('Get all contacts list', () => {
     cy.request({
       method: 'GET',
       url: '/contacts',
@@ -18,9 +17,11 @@ describe('My tests', () => {
       }
     }).then((response) => {
       expect(response.status).to.eq(200);
+      expect(response.body).to.be.an('array').and.not.empty;
+      response.body.forEach((contact: any) => {
+        expect(contact).to.have.keys('_id', 'firstName', 'lastName', 'phone', 'email', 'birthdate', 'street1', 'street2', 'city', 'stateProvince', 'postalCode', 'country', 'owner', '__v');
+      });
 
-      expect(response.body[0]).to.have.property('_id');
-      expect(response.body[0]).to.have.property('firstName', "Johdfsn");
-    })
+    });
   });
 });
