@@ -22,7 +22,7 @@ describe('Get contact', () => {
       }
     }).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body).to.have.keys('_id', 'firstName', 'lastName', 'phone', 'email', 'birthdate', 'street1', 'street2', 'city', 'stateProvince', 'postalCode', 'country', 'owner', '__v');
+      expect(response.body).to.have.keys('_id', 'firstName', 'lastName', 'phone', 'email', 'birthdate', 'street1', 'street2', 'city', 'stateProvince', 'postalCode', 'country', 'owner', '__v').and.not.null;
     })
   });
 });
