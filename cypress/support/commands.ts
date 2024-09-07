@@ -54,7 +54,7 @@ Cypress.Commands.add('getContactId', () => {
     }).then((response) => {
       expect(response.status).to.eq(200);
       const contactId = response.body[0]._id;
-      return contactId; // повертаємо contactId
+      return contactId;
     });
   });
 });
