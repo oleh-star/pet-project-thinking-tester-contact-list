@@ -26,18 +26,35 @@
 declare namespace Cypress {
   interface Chainable<Subject> {
     getToken(): Chainable<string>;
+    getContactId(): Chainable<string>;
   }
 }
 
 Cypress.Commands.add('getToken', () => {
+  return cy.request({
+    method: "POST",
+    url: "/users/login",
+    body: {
+      email: "mynana1057@fak.com",
+      password: "mynana1057@fak.com"
+    }
+  }).then((response) => {
+    return response.body.token;
+  });
+});
+
+Cypress.Commands.add('getContactId', () => {
+  cy.getToken().then((token: string) => {
     return cy.request({
-        method: "POST",
-        url: "/users/login",
-        body: {
-            email: "mynana1057@fak.com",
-            password: "mynana1057@fak.com"
-        }
+      method: 'GET',
+      url: '/contacts',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }).then((response) => {
-        return response.body.token;
+      expect(response.status).to.eq(200);
+      const contactId = response.body[0]._id;
+      return contactId; // повертаємо contactId
     });
+  });
 });
