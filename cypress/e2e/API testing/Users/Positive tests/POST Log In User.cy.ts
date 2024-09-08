@@ -1,3 +1,6 @@
+// @ts-ignore
+import userJson from "../../../../fixtures/user.json";
+
 describe('Login and get token', () => {
   it('API Login test', () => {
     cy.request(
@@ -12,10 +15,11 @@ describe('Login and get token', () => {
         console.log(token);
         expect(response.status).to.eq(200);
         expect(response.body).to.have.property('token', token);
+        cy.fixture('user').as('userInformation')
         expect(response.body).to.have.property('user');
-        expect(response.body.user).to.have.property('_id', '66d19bb3e58d2200130d9bf8');
-        expect(response.body.user).to.have.property('firstName', 'Michael');
-        expect(response.body.user).to.have.property('lastName', 'Chypapa');
+        expect(response.body.user).to.have.property('_id', userJson.id);
+        expect(response.body.user).to.have.property('firstName', userJson.firstName);
+        expect(response.body.user).to.have.property('lastName', userJson.lastName);
 
       })
   })
